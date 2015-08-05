@@ -10,8 +10,15 @@ app.use(express.static('./dist'))
 app.use(helmet())
 
 app.get('/download',function(req,res){
-  res.setHeader('Content-disposition', 'attachment; filename=dope.mp4');
+  // res.setHeader('Content-disposition', 'attachment; filename=dope.mp4');
   youtube.download(res)
+})
+
+app.get('/videoJson',function(req,res){
+  video = req.query.url
+  youtube.getJson(video, function(info){
+    res.json(info)
+  })
 })
 
 var server = app.listen(3000, function(){

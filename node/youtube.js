@@ -5,13 +5,8 @@ var fs = require('fs')
 var http = require('http')
 var ytdl = 'youtube-dl'
 var switches = ['https://www.youtube.com/watch?v=MZEQOoE3-u4'
-                // '--dump-json'
-                // ,'-f ogg '
-                // , '-s'
-                // ,'--all-formats'
                 ,'-x'
                 ,'--audio-format mp3'
-                // ,'--recode-video avi'
                 ,'--audio-quality 0'
               ]
 var mainFormats = ['3gp','flv','m4a','mp4','webm']
@@ -41,6 +36,13 @@ var randomId = function(){
   return id
 }
 
+function escapeVideo(video){
+  if(!video) return
+  var alrightCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890:/.?&='
+  var regex = new RegExp('[^' + alrightCharacters +']', 'g');
+  return video.replace(regex,'')
+}
+
 var createId = function(callback,res){
   console.log(__dirname)
   var id = randomId()
@@ -56,6 +58,21 @@ exports.download = function(res){
   createId(download,res);
 }
 
-exports.fileName = function(video){
-  exec('')
+exports.getJson = function(video,fn){
+  video = escapeVideo(video)
+  exec("youtube-dl '" + video + "' --dump-json",function(e,info){
+    if(!e){
+      info = JSON.parse(info)
+      if(info.extractor == 'youtube'){
+        info.formats = null
+        fn(info)
+      }
+      else{
+        fn({error:2})
+      }
+    }
+    else{
+      fn({error:1})
+    }
+  })
 }

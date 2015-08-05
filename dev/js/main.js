@@ -17,15 +17,14 @@
   var app = angular.module('yt-dl',[])
 
   app.controller('ctrl',function($scope,$http,$sce){
+    $scope.trustSrc = function(src) {
+      return $sce.trustAsResourceUrl(src);
+    }
 
-  $scope.trustSrc = function(src) {
-    return $sce.trustAsResourceUrl(src);
-  }
-
-  $scope.resetData = function(){
-    $scope.vidData = null
-    $scope.videoId = null
-  }
+    $scope.resetData = function(){
+      $scope.vidData = null
+      $scope.videoId = null
+    }
 
     $scope.findVideo = function(){
       var urlData = getDataFromUrl($scope.search)
@@ -50,10 +49,6 @@
           $scope.vidData = data
           console.log(JSON.stringify(data,null,2))
         })
-        .error(function(){
-
-        })
     }
   })
-
 }()
