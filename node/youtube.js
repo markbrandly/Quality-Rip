@@ -67,9 +67,7 @@ exports.getJson = function(video,fn){
         info.formats = null
         fn(info)
       }
-      else{
-        fn({error:2})
-      }
+      else fn({error:2})
     }
     else{
       fn({error:1})
