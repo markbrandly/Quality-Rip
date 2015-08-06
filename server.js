@@ -4,7 +4,12 @@ var helmet = require('helmet')
 require('./gulpfile.js')
 var app = express();
 var youtube = require('./node/youtube.js')
-
+var path = require('path')
+var staticCache = require('express-static-cache')
+ 
+app.use(staticCache(path.join(__dirname, 'dist'), {
+  maxAge: 365 * 24 * 60 * 60
+}))
 
 app.use(express.static('./dist'))
 app.use(helmet())

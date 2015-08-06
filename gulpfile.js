@@ -18,7 +18,7 @@ gulp.task('sass', function(){
   gulp.src([paths.css+'/main.scss',paths.css+'/normalize.css'])
     .pipe(concat('main.css'))
     .pipe(sass().on('error', sass.logError))
-        .pipe(minifyCss({compatibility:'ie8'}))
+    .pipe(minifyCss({compatibility:'ie8'}))
     .pipe(autoprefixer())
     .pipe(gulp.dest('./dist/css'))
   console.log('sassed!')
@@ -31,15 +31,16 @@ gulp.task('index',function(){
 })
 
 gulp.task('js',function(){
-  gulp.src(paths.js+'/*.js')
+  gulp.src(paths.js+'/main.js')
+    .pipe(ngannotate({}))
+    .pipe(uglify())
+    .pipe(gulp.src(paths.js+'/*.js'))
     .pipe(order([
         paths.js+'/angular.1.4.3.min.js',
         paths.js+'/angular-animate.min.js',
         paths.js+'/main.js'
       ]))
     .pipe(concat('main.js'))
-    .pipe(ngannotate({}))
-    .pipe(uglify())
     .pipe(gulp.dest('./dist/js'))
 })
 
