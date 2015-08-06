@@ -10,7 +10,8 @@ app.use(express.static('./dist'))
 app.use(helmet())
 
 app.get('/download',function(req,res){
-  // res.setHeader('Content-disposition', 'attachment; filename=dope.mp4');
+  // res.setHeader('Content-disposition', 'attachment; filename="Sleepy_Tom_-_Pusher_feat._Anna_Lunoe_Branchez_Remix.webm"');
+  // res.setHeader('Content-type', 'video/webm');
   youtube.download(res)
 })
 

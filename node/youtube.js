@@ -1,6 +1,8 @@
 var util  = require('util'),
-    exec = require('child_process').exec
-    // ls    = exec('ls', ['-lh', '/usr']);
+    // exec = require('child_process').exec,
+    process = require('child_process'),
+    exec = process.exec
+    spawn = process.spawn
 var fs = require('fs')
 var http = require('http')
 var ytdl = 'youtube-dl'
@@ -38,7 +40,7 @@ var randomId = function(){
 
 function escapeVideo(video){
   if(!video) return
-  var alrightCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890:/.?&='
+  var alrightCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890:/.?&=#%'
   var regex = new RegExp('[^' + alrightCharacters +']', 'g');
   return video.replace(regex,'')
 }
@@ -60,17 +62,24 @@ exports.download = function(res){
 
 exports.getJson = function(video,fn){
   video = escapeVideo(video)
-  exec("youtube-dl '" + video + "' --dump-json",function(e,info){
-    if(!e){
-      info = JSON.parse(info)
+  var child = spawn('youtube-dl',[video,'--dump-json']);
+  var stdout = "", stderr = "";
+
+  child.stdout.on("data",function(data){
+    if(data!==null) stdout += data;
+  });
+  child.stderr.on("data",function(data){
+    if(data!==null) stderr += data;
+  })
+  child.on('close',function(code){
+    if(code === 0){
+      var info = JSON.parse(stdout)
       if(info.extractor == 'youtube'){
         info.formats = null
         fn(info)
       }
-      else fn({error:2})
     }
-    else{
-      fn({error:1})
-    }
+    else fn({error:1})
   })
+  // child.write(video + " --dump-json")
 }
