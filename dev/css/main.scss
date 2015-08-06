@@ -10,9 +10,14 @@ $black: #000;
   font-weight:300;
 }
 
-a{color:$ytRed}
+a{color:$ytRed;
 
+text-decoration:none;
+  &:hover{
+    text-decoration: underline;
+  }
 
+}
 
 .animate-if {
   background:white;
@@ -34,10 +39,6 @@ a{color:$ytRed}
 
 body{
   background:url('../assets/img/background.png')
-}
-
-section{
-
 }
 
 .video-image{
@@ -63,11 +64,13 @@ section{
 }
 
 .video-wrapper {
+  background-color:#000;
   position: relative;
   padding-bottom: 56.25%; /* 16:9 */
   padding-top: 25px;
   height: 0;
 }
+
 .video-wrapper iframe {
   position: absolute;
   top: 0;
@@ -115,26 +118,41 @@ section{
   // border-radius:0 0 2px 2px;
 }
 
+.search-holder{
+  display:flex;
+  align-items:center;
+}
+
 .vid-search{
-  // padding:0.5em;
+  // padding:0.25em;
   width:100%;
+  flex-grow:1;
   background-color:white;
   outline:0;
   color:#aaa;
    border:0;
+   padding:1em;
   // border:2px solid white;
+}
+
+.svg-search{
+  height:1em;
+  width:1em;
+  padding:1em;
+  fill:#aaa;
+  box-sizing:content-box;
+  outline:0;
+}
+
+button.unbutton{
+  background:transparent;
+  border:0;
+  padding:0;
+  margin:0;
 }
 
 .vid-search:focus{
  // border:#$ytRed solid 1px;
  color:$black;
 
-}
-
-.video-module{
-  // border:1px solid $black;
-  // border-top:4px solid $ytRed;
-  // background-color:white;
-  // border-radius:2px;
-  // overflow:hidden;
 }
