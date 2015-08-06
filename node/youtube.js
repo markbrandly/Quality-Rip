@@ -40,7 +40,7 @@ var randomId = function(){
 
 function escapeVideo(video){
   if(!video) return
-  var alrightCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890:/.?&=#%'
+  var alrightCharacters = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890:/.?&=#%_-'
   var regex = new RegExp('[^' + alrightCharacters +']', 'g');
   return video.replace(regex,'')
 }
@@ -64,7 +64,7 @@ exports.getJson = function(video,fn){
   video = escapeVideo(video)
   var child = spawn('youtube-dl',[video,'--dump-json']);
   var stdout = "", stderr = "";
-
+  console.log(video)
   child.stdout.on("data",function(data){
     if(data!==null) stdout += data;
   });
@@ -72,6 +72,8 @@ exports.getJson = function(video,fn){
     if(data!==null) stderr += data;
   })
   child.on('close',function(code){
+    console.log(stderr)
+    console.log(code)
     if(code === 0){
       var info = JSON.parse(stdout)
       if(info.extractor == 'youtube'){

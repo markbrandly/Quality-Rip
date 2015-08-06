@@ -1,5 +1,5 @@
 !function(){
-  var app = angular.module('yt-dl',[])
+  var app = angular.module('yt-dl',['ngAnimate'])
 
   app.controller('ctrl',function($scope,$http,$sce){
     $scope.trustSrc = function(src) {

@@ -12,6 +12,26 @@ $black: #000;
 
 a{color:$ytRed}
 
+
+
+.animate-if {
+  background:white;
+}
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  transition:all 0.4s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
 body{
   background:url('../assets/img/background.png')
 }
@@ -57,7 +77,7 @@ section{
 }
 
 .video-wrapper .video-image{
-    position: absolute;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
