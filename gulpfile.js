@@ -13,7 +13,7 @@ var paths = {
 }
 
 gulp.task('sass', function(){
-  gulp.src([paths.css+'/main.scss','./node_modules/normalize.css/normalize.css'])
+  gulp.src([paths.css+'/main.scss',paths.css+'/normalize.css'])
     .pipe(concat('main.css'))
     .pipe(sass().on('error', sass.logError))
         .pipe(minifyCss({compatibility:'ie8'}))

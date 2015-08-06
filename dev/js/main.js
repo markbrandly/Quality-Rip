@@ -1,19 +1,4 @@
 !function(){
-  function getDataFromUrl(url){
-    splitUrl = url.split('?')
-    if(splitUrl.length>1){
-      var dataObj = {}
-      var dataPh
-      data = splitUrl[1]
-      data = data.split('&')
-      for(var i = 0; i < data.length; i++){
-        var dataPh = data[i].split('=')
-        dataObj[dataPh[0]] = dataPh[1]
-      }
-      return dataObj
-    }
-    return false;
-  }
   var app = angular.module('yt-dl',[])
 
   app.controller('ctrl',function($scope,$http,$sce){
@@ -23,27 +8,19 @@
 
     $scope.resetData = function(){
       $scope.vidData = null
-      $scope.videoId = null
     }
 
     $scope.findVideo = function(){
-      var urlData = getDataFromUrl($scope.search)
-      if(urlData && urlData.v){
-        $scope.videoId = urlData.v
-        $scope.loadVideo($scope.videoId,$http)
-      }
-      else{
-        $scope.videoId = ''
-      }
+      var url = $scope.search;
+      $scope.loadVideo(url)
     }
 
-    $scope.loadVideo = function(id,$http){
+    $scope.loadVideo = function(url){
       var req = {
         method: 'GET',
-        url: 'https://zazkov-youtube-grabber-v1.p.mashape.com/download.video.php?id='+id,
+        url: 'http://localhost:3000/videoJson?url=' + url,
         headers:{},
       }
-      req.headers['X-Mashape-Key'] = 'guvF5ja5DpmshEL6WyA5hFQWU22lp16Ij2ljsnHcwxUeIKvhOs'
       $http(req)
         .success(function(data){
           $scope.vidData = data

@@ -24,26 +24,15 @@
                 <div class='video-module'>
                     <input ng-change='resetData();findVideo()' type='search' ng-model='search' class='vid-search module-section' placeholder='Youtube Video Link'>
 
-                    <section class='module-section' ng-if="videoId && !vidData">
-                        Loading...
-                    </section>
-
-                    <section class='module-section' ng-if="!videoId && search">
-                        Could Not Determine Video Id
-                    </section>
-
-                    <section class='module-section' ng-if="videoId && search && vidData && vidData.title==null">
-                        Video Not Found
-                    </section>
                     <section class='module-section' ng-if="vidData && vidData.title">
                         <a ng-href='//youtube.com/watch?v={{videoId}}'><h2 class='video-title'>{{vidData.title}}</h2></a>
                     </section>
 
-                    <section class='module-section no-padding' ng-if="vidData.img">
+                    <section class='module-section no-padding' ng-if="vidData.thumbnail">
                         
                         <div class='video-wrapper'>
-                            <img class='video-image' ng-src="{{vidData.img}}">
-                            <iframe ng-src="{{trustSrc('https://www.youtube.com/embed/'+videoId)}}" frameborder="0" allowfullscreen></iframe>
+                            <img class='video-image' ng-src="{{vidData.thumbnail}}">
+                            <iframe ng-src="{{trustSrc('https://www.youtube.com/embed/'+vidData.display_id)}}" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </section>
 

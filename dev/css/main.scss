@@ -75,8 +75,10 @@ section{
 }
 
 .module-section{
-  border:1px solid $black;
-  padding:0.5em;
+  // border:1px solid $black;
+  background-color:white;
+  padding:1em;
+  box-shadow:1px 2px 8px rgba(0,0,0,0.2)
 }
 
 .module-section.no-padding{
@@ -86,31 +88,33 @@ section{
 }
 
 .module-section+.module-section{
-  border-top:0;
+  margin-top:1em;
 }
 
 .module-section:last-child{
-  border-radius:0 0 2px 2px;
+  // border-radius:0 0 2px 2px;
 }
 
 .vid-search{
-  padding:0.5em;
+  // padding:0.5em;
   width:100%;
   background-color:white;
   outline:0;
   color:#aaa;
+   border:0;
   // border:2px solid white;
 }
 
 .vid-search:focus{
  // border:#$ytRed solid 1px;
  color:$black;
+
 }
 
 .video-module{
   // border:1px solid $black;
-  border-top:4px solid $ytRed;
-  background-color:white;
-  border-radius:2px;
-  overflow:hidden;
+  // border-top:4px solid $ytRed;
+  // background-color:white;
+  // border-radius:2px;
+  // overflow:hidden;
 }
