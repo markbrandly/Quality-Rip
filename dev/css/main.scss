@@ -24,7 +24,7 @@ text-decoration:none;
 }
 
 .animate-if.ng-enter, .animate-if.ng-leave {
-  transition:all 0.4s;
+  transition:opacity 0.4s;
 }
 
 .animate-if.ng-enter,
@@ -123,6 +123,7 @@ body{
   align-items:center;
 }
 
+
 .vid-search{
   // padding:0.25em;
   width:100%;
@@ -135,6 +136,15 @@ body{
   // border:2px solid white;
 }
 
+.vid-search:focus + .search-icon-holder > .svg-search,
+.search-holder:hover .svg-search{
+  fill:#222;
+}
+
+.svg-search:hover{
+  // animation-play-state:running;
+}
+
 .svg-search{
   height:1em;
   width:1em;
@@ -142,6 +152,17 @@ body{
   fill:#aaa;
   box-sizing:content-box;
   outline:0;
+  transition:fill 0.2s, transform 0.2s;
+  animation-name:spin;
+  animation-duration:0.5s;
+  animation-iteration-count:infinite;
+  animation-timing-function:linear;
+  animation-play-state:paused;
+  transform-origin:47.6% 47.6%;
+}
+@keyframes spin {
+  from {transform:rotate(0deg)}
+  to {transform:rotate(360deg)}
 }
 
 button.unbutton{

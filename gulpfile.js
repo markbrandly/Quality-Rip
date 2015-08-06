@@ -6,10 +6,12 @@ var uglify = require('gulp-uglify')
 var minifyHTML = require('gulp-minify-html');
 var concat = require('gulp-concat')
 var ngannotate = require('gulp-ng-annotate')
+var order = require("gulp-order");
 
 
 var paths = {
-  css : './dev/css'
+  css : 'dev/css',
+  js  : 'dev/js'
 }
 
 gulp.task('sass', function(){
@@ -29,12 +31,18 @@ gulp.task('index',function(){
 })
 
 gulp.task('js',function(){
-  gulp.src('./dev/js/main.js')
+  gulp.src(paths.js+'/*.js')
+    .pipe(order([
+        paths.js+'/angular.1.4.3.min.js',
+        paths.js+'/angular-animate.min.js',
+        paths.js+'/main.js'
+      ]))
+    .pipe(concat('main.js'))
     .pipe(ngannotate({}))
     .pipe(uglify())
     .pipe(gulp.dest('./dist/js'))
 })
 
 gulp.watch(paths.css+'/main.scss', ['sass'])
-gulp.watch('./dev/js/main.js', ['js'])
+gulp.watch(paths.js+'/*.js', ['js'])
 gulp.watch('./dev/index.html',['index'])
