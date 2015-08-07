@@ -1,6 +1,11 @@
 $ytRed : #cd201f;
 $black: #000;
 
+
+
+
+
+
 *{
   font-family:Open Sans;
   box-sizing:border-box;
@@ -124,8 +129,9 @@ body{
 }
 
 
+
+
 .vid-search{
-  // padding:0.25em;
   width:100%;
   flex-grow:1;
   background-color:white;
@@ -133,36 +139,66 @@ body{
   color:#aaa;
    border:0;
    padding:1em;
-  // border:2px solid white;
 }
 
 .vid-search:focus + .search-icon-holder > .svg-search,
 .search-holder:hover .svg-search{
-  fill:#222;
+  // fill:#222;
 }
 
-.svg-search:hover{
-  // animation-play-state:running;
+$transitionTime:0.4s;
+
+.svg-search {
+    stroke-width:4px;
+    stroke:#000;
+    fill:none;
+    stroke-linecap:round;
+    height:1em;
+    width:1em;
+    padding:1em;
+    box-sizing:content-box;
 }
 
-.svg-search{
-  height:1em;
-  width:1em;
-  padding:1em;
-  fill:#aaa;
-  box-sizing:content-box;
-  outline:0;
-  transition:fill 0.2s, transform 0.2s;
-  animation-name:spin;
-  animation-duration:0.5s;
-  animation-iteration-count:infinite;
-  animation-timing-function:linear;
-  animation-play-state:paused;
-  transform-origin:47.6% 47.6%;
+.svg-search-lens-holder{
+    transform:translate(0,0);
+    transition:transform $transitionTime;
 }
-@keyframes spin {
-  from {transform:rotate(0deg)}
-  to {transform:rotate(360deg)}
+
+.svg-search-lens{
+    transform-origin:13px 13px;
+    transform:translate(0,0);
+    transition:transform $transitionTime;
+    animation-name:spin;
+    animation-duration:0.5s;
+    animation-iteration-count:infinite;
+    animation-timing-function:linear;
+    animation-play-state:paused;
+}
+
+.svg-search-lens-n{
+    transform:translate(0,0);
+    transition:transform $transitionTime;
+    transform-origin:13px 13px;
+}
+
+.svg-search-handle{
+    transform:translate(0,0);
+    transition:opacity $transitionTime, transform $transitionTime;
+}
+
+.loading{
+  .svg-search-lens{animation-play-state:running}
+  .svg-search-lens-holder{transform:translate(3px,3px) scale(1.2,1.2)}
+  .svg-search-lens-n{transform:rotate(-120deg)}
+  .svg-search-handle{
+    transform:translate(6px,6px);
+    opacity:0;
+  }
+} 
+
+@keyframes spin{
+    from{transform: rotate(0deg)}
+    to {transform: rotate(360deg)}
 }
 
 button.unbutton{

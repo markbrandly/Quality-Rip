@@ -25,17 +25,17 @@
 
                     <section class="module-section search-holder no-padding">
                         <input ng-change='resetData();findVideo()' type='search' ng-model='search' class='vid-search' placeholder='Youtube Video Link'>
-                        <button class="unbutton search-icon-holder">
-                            <svg class='svg-search' viewBox="0 0 584.432 584.432">
-                                <path d="M565.654,474.906l-61.121-61.121c-3.803-3.803-8.754-5.898-13.938-5.898c-6.283,0-12.098,3.031-15.949,8.316
-                                        c-16.34,22.426-35.998,42.08-58.426,58.424c-4.807,3.504-7.818,8.777-8.262,14.469c-0.439,5.645,1.689,11.266,5.842,15.418
-                                        l61.121,61.121c12.121,12.121,28.238,18.797,45.377,18.797c17.145,0,33.252-6.676,45.357-18.803
-                                        C590.67,540.623,590.67,499.922,565.654,474.906z"/>
-                                <path d="M254.559,509.086c140.355,0,254.543-114.188,254.543-254.543C509.102,114.187,394.914,0,254.559,0
-                                        C114.203,0,0.016,114.187,0.016,254.543C0.016,394.898,114.203,509.086,254.559,509.086z M254.559,76.402
-                                        c98.227,0,178.141,79.912,178.141,178.141c0,98.229-79.912,178.141-178.141,178.141c-98.229,0-178.141-79.912-178.141-178.141
-                                        C76.418,156.314,156.333,76.402,254.559,76.402z"/>
-                            </svg>
+                        <button class="unbutton search-icon-holder" ng-class="{loading:loading}">
+                            <svg viewBox="0 0 32 32" class='svg-search' ng-class="loading">
+                                <g class='svg-search-lens-holder'>
+                                  <g class='svg-search-lens'>
+                                      <path class='svg-search-lens-n' d="M21.7,8c-1.7-3-5-5-8.7-5S6.1,5,4.3,8"/>
+                                      <path d="M4.3,8C3.5,9.5,3,11.2,3,13c0,5.5,4.5,10,10,10"/>
+                                      <path d="M13,23c5.5,0,10-4.5,10-10c0-1.8-0.5-3.5-1.3-5"/>
+                                  </g>
+                                </g>
+                                <line class='svg-search-handle' x1="29" y1="29" x2="21" y2="21"/>
+                              </svg>
                         </button>
                     </section>
 

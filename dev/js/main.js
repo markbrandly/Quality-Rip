@@ -16,6 +16,7 @@
     }
 
     $scope.loadVideo = function(url){
+      $scope.loading = true;
       var req = {
         method: 'GET',
         url: 'http://localhost:3000/videoJson?url=' + url,
@@ -23,6 +24,7 @@
       }
       $http(req)
         .success(function(data){
+          $scope.loading=false;
           $scope.vidData = data
           console.log(JSON.stringify(data,null,2))
         })
