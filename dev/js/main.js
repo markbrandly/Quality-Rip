@@ -77,6 +77,7 @@
         .success(function(data){
           $scope.loading=false;
           $scope.vidData = data
+          if(data['webpage_url']) $scope.search = data['webpage_url']
           console.log(JSON.stringify(data,null,2))
         })
     }

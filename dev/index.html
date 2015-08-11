@@ -23,20 +23,22 @@
             <div class='width-container'>
                 <div class='video-module'>
 
-                    <section class="module-section search-holder no-padding">
-                        <input ng-change='resetData();findVideo()' type='search' ng-model='search' class='vid-search' placeholder='Youtube Video Link'>
-                        <button class="unbutton search-icon-holder" ng-class="{loading:loading}">
-                            <svg viewBox="0 0 32 32" class='svg-search' ng-class="loading">
-                                <g class='svg-search-lens-holder'>
-                                  <g class='svg-search-lens'>
-                                      <path class='svg-search-lens-n' d="M21.7,8c-1.7-3-5-5-8.7-5S6.1,5,4.3,8"/>
-                                      <path d="M4.3,8C3.5,9.5,3,11.2,3,13c0,5.5,4.5,10,10,10"/>
-                                      <path d="M13,23c5.5,0,10-4.5,10-10c0-1.8-0.5-3.5-1.3-5"/>
-                                  </g>
-                                </g>
-                                <line class='svg-search-handle' x1="29" y1="29" x2="21" y2="21"/>
-                              </svg>
-                        </button>
+                    <section class="module-section  no-padding">
+                        <form name='dope-form' class='search-holder' ng-submit="findVideo()">
+                            <input name='video' type='search' ng-model='search' class='vid-search' placeholder='Youtube Video Link'>
+                            <button name='submit' class="unbutton search-icon-holder" ng-class="{loading:loading}">
+                                <svg viewBox="0 0 32 32" class='svg-search' ng-class="loading">
+                                    <g class='svg-search-lens-holder'>
+                                      <g class='svg-search-lens'>
+                                          <path class='svg-search-lens-n' d="M21.7,8c-1.7-3-5-5-8.7-5S6.1,5,4.3,8"/>
+                                          <path d="M4.3,8C3.5,9.5,3,11.2,3,13c0,5.5,4.5,10,10,10"/>
+                                          <path d="M13,23c5.5,0,10-4.5,10-10c0-1.8-0.5-3.5-1.3-5"/>
+                                      </g>
+                                    </g>
+                                    <line class='svg-search-handle' x1="29" y1="29" x2="21" y2="21"/>
+                                  </svg>
+                            </button>
+                        </form>
                     </section>
 
                     <section class='module-section animate-if' ng-if="vidData && vidData.title">
@@ -51,7 +53,7 @@
                     </section>
 
                     <section class="module-section animate-if" ng-if="vidData.display_id">
-                        <button class='no-button' ng-click='download(vidData.display_id)'>Download</button>
+                        <button class='unbutton link' ng-click='download(vidData.display_id)'>Download</button>
                     </section>
                 </div>
             </div>

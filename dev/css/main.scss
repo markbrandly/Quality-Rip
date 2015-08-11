@@ -15,13 +15,18 @@ $black: #000;
   font-weight:300;
 }
 
-a{color:$ytRed;
+a,.link{color:$ytRed;
 
 text-decoration:none;
   &:hover{
     text-decoration: underline;
   }
 
+}
+
+.hidden{
+  display:none;
+  visibility:hidden;
 }
 
 .animate-if {
