@@ -51,7 +51,7 @@
                     </section>
 
                     <section class="module-section animate-if" ng-if="vidData.display_id">
-                        <a ng-href="{{vidData.webpage_url}}">Download</a>
+                        <button class='no-button' ng-click='download(vidData.display_id)'>Download</button>
                     </section>
                 </div>
             </div>

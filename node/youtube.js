@@ -17,12 +17,15 @@ var audioFormats = ['mp3','aac','wav',]
 
 
 
-var download = function(id,res){
+var download = function(id,token,vidId,res){
+  if(!id || !vidId || !res) return
   var dir = __dirname+'/tmp/downloads/'+id
-  var command = 'youtube-dl https://www.youtube.com/watch?v=MZEQOoE3-u4 --restrict-filenames -o "' + dir +'/%(title)s.%(ext)s"'
-  console.log(dir)
+  var video = escapeVideo('https://www.youtube.com/watch?v='+vidId)
+  var command = 'youtube-dl '+video+' --restrict-filenames -o "' + dir +'/%(title)s.%(ext)s"'
+  console.log(command)
   exec(command,function(e){
     exec(command+' --get-filename',function(e,filename){
+      res.cookie(token,'1')
       res.download(filename.slice(0,-1)) //removes newline from end of filename
       exec('rm -rf -- '+dir)
     })
@@ -45,19 +48,21 @@ function escapeVideo(video){
   return video.replace(regex,'')
 }
 
-var createId = function(callback,res){
+var createId = function(callback){
   console.log(__dirname)
   var id = randomId()
   console.log(id)
   fs.mkdir(__dirname+'/tmp/downloads/'+id,function(e){
     console.log(e)
-    if(!e) callback(id,res);
-    else createId(callback,res);
+    if(!e) callback(id);
+    else createId(callback);
   })
 }
 
-exports.download = function(res){
-  createId(download,res);
+exports.download = function(vidId,token,res){
+  createId(function(id){
+    download(id,token,vidId,res)
+  });
 }
 
 exports.getJson = function(video,fn){
