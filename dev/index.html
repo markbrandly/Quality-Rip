@@ -25,7 +25,7 @@
 
                     <section class="module-section  no-padding">
                         <form name='dope-form' class='search-holder' ng-submit="findVideo()">
-                            <input name='video' type='search' ng-model='search' class='vid-search' placeholder='Youtube Video Link'>
+                            <input name='video' type='search' ng-model='search' class='vid-search module-input' placeholder='Youtube Video Link'>
                             <button name='submit' class="unbutton search-icon-holder" ng-class="{loading:loading}">
                                 <svg viewBox="0 0 32 32" class='svg-search' ng-class="loading">
                                     <g class='svg-search-lens-holder'>
@@ -41,26 +41,30 @@
                         </form>
                     </section>
 
-                    <section class='module-section animate-if' ng-if="vidData && vidData.title">
+                    <section class='module-section animate-if' ng-show="vidData && vidData.title">
                         <a ng-href='{{vidData.webpage_url}}'><h2 class='video-title'>{{vidData.title}}</h2></a>
                     </section>
 
-                    <section class='module-section no-padding' ng-if="vidData.thumbnail"> 
+                    <section class='module-section no-padding' ng-show="vidData.thumbnail"> 
                         <div class='video-wrapper'>
                             <!-- This is what's going to be here, but the content is generated in Javascript because
                                 Iframes do weird things to state Change
-                                
+
                             <iframe ng-src="{{trustSrc('https://www.youtube.com/embed/'+vidData.display_id)}}" frameborder="0" allowfullscreen></iframe>
 
                             -->
                         </div>
                     </section>
 
-                    <section class="module-section animate-if" ng-if="vidData.display_id">
+                    <section class="module-section animate-if" ng-show="vidData.display_id">
                         <div ng-repeat='type in fileTypes'>
                             {{type.name.toUpperCase()}}<span class='small light'>{{type.type}}</span>
                         <button class='unbutton link' ng-click='download(vidData.display_id)'>Download</button>
                         </div>
+                    </section>
+
+                    <section class="module-section animate-if no-padding" ng-show="vidData.display_id">
+                        <input ng-value="'http://quality.rip/v=' + vidData.display_id" readonly class='module-input embed'>
                     </section>
                 </div>
             </div>

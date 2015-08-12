@@ -10,6 +10,17 @@
     return id
   }
   
+  function className(selector){
+    var items = document.getElementsByClassName(selector)
+    return {
+      items: items,
+      click: function(callback){
+        for (var i = this.items.length - 1; i >= 0; i--) {
+          this.items[i].onclick = callback
+        };
+      }
+    }
+  }
 
   function removeElement(node) {
     node.parentNode.removeChild(node);
@@ -116,6 +127,7 @@
       $http(req)
         .success(function(data){
           $scope.loading=false;
+          if($scope.vidData && $scope.vidData.display_id === data.display_id) return
           $scope.vidData = data
           console.log(JSON.stringify(data,null,2))
           if(data['webpage_url']){
@@ -125,8 +137,6 @@
           }
         })
     }
-
-
 
     function updateVideo(){
       if(!$scope.vidData || !$scope.vidData.display_id) return
@@ -155,6 +165,7 @@
       console.log(e.state.state)
     }
 
+    className('embed').click(function(e){console.log(e)})
 
   })
 }();
