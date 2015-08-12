@@ -13,7 +13,7 @@ var switches = ['https://www.youtube.com/watch?v=MZEQOoE3-u4'
               ]
 var mainFormats = ['3gp','flv','m4a','mp4','webm']
 var recodeFormats = ['flv','ogg','mkv','avi']
-var audioFormats = ['mp3','aac','wav',]
+var audioFormats = ['mp3','aac','wav']
 
 
 

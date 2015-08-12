@@ -45,15 +45,22 @@
                         <a ng-href='{{vidData.webpage_url}}'><h2 class='video-title'>{{vidData.title}}</h2></a>
                     </section>
 
-                    <section class='module-section no-padding animate-if' ng-if="vidData.thumbnail"> 
+                    <section class='module-section no-padding' ng-if="vidData.thumbnail"> 
                         <div class='video-wrapper'>
-                            <!-- <img class='video-image' ng-src="{{vidData.thumbnail}}"> -->
+                            <!-- This is what's going to be here, but the content is generated in Javascript because
+                                Iframes do weird things to state Change
+                                
                             <iframe ng-src="{{trustSrc('https://www.youtube.com/embed/'+vidData.display_id)}}" frameborder="0" allowfullscreen></iframe>
+
+                            -->
                         </div>
                     </section>
 
                     <section class="module-section animate-if" ng-if="vidData.display_id">
+                        <div ng-repeat='type in fileTypes'>
+                            {{type.name.toUpperCase()}}<span class='small light'>{{type.type}}</span>
                         <button class='unbutton link' ng-click='download(vidData.display_id)'>Download</button>
+                        </div>
                     </section>
                 </div>
             </div>
