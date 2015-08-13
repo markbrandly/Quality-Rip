@@ -1,5 +1,6 @@
 <!doctype html>
 <html class='no-js' lang="en">
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/f4b3732b5b/UntitledProject2/style.css">
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -24,10 +26,10 @@
                 <div class='video-module'>
 
                     <section class="module-section  no-padding">
-                        <form name='dope-form' class='search-holder' ng-submit="findVideo()">
-                            <input name='video' type='search' ng-model='search' class='vid-search module-input' placeholder='Youtube Video Link'>
-                            <button name='submit' class="unbutton search-icon-holder" ng-class="{loading:loading}">
-                                <svg viewBox="0 0 32 32" class='svg-search' ng-class="loading">
+                        <form class='search-holder' ng-submit="findVideo()">
+                            <input type='search' ng-model='search' class='vid-search module-input' placeholder='Youtube Video Link'>
+                            <button class="unbutton search-icon-holder" ng-class="{loading:loading}">
+                                <svg viewBox="0 0 32 32" class='svg-search'>
                                     <g class='svg-search-lens-holder'>
                                       <g class='svg-search-lens'>
                                           <path class='svg-search-lens-n' d="M21.7,8c-1.7-3-5-5-8.7-5S6.1,5,4.3,8"/>
@@ -63,8 +65,42 @@
                         </div>
                     </section>
 
-                    <section class="module-section animate-if no-padding" ng-show="vidData.display_id">
-                        <input ng-value="'http://quality.rip/v=' + vidData.display_id" readonly class='module-input embed'>
+                    <section class="module-section animate-if no-padding search-holder" ng-show="vidData.display_id">
+                            <button class='copy-button unbutton' data-clipboard-text="Copy Me!">
+                                <svg viewBox="0 0 247.744 247.744" height="1em" width="1em" style="padding:1em;box-sizing:content-box;">
+                                    <g>
+                                        <path style="fill:#000002;" d="M206.89,0H74.824c-9.649,0-17.5,7.851-17.5,17.5v21.005h-16.47c-9.649,0-17.5,7.85-17.5,17.5
+                                            v174.239c0,9.649,7.851,17.5,17.5,17.5h132.065c9.649,0,17.5-7.851,17.5-17.5V209.24h16.471c9.649,0,17.5-7.851,17.5-17.5V17.5
+                                            C224.39,7.851,216.54,0,206.89,0z M175.419,230.244c0,1.355-1.145,2.5-2.5,2.5H40.854c-1.355,0-2.5-1.145-2.5-2.5V56.005
+                                            c0-1.356,1.145-2.5,2.5-2.5h132.065c1.355,0,2.5,1.144,2.5,2.5V230.244z M209.39,191.74c0,1.355-1.145,2.5-2.5,2.5h-16.471V56.005
+                                            c0-9.65-7.851-17.5-17.5-17.5H72.324V17.5c0-1.355,1.144-2.5,2.5-2.5H206.89c1.355,0,2.5,1.145,2.5,2.5V191.74z"/>
+                                        <path style="fill:#000002;" d="M149.553,77.121H64.22c-4.143,0-7.5,3.357-7.5,7.5c0,4.143,3.357,7.5,7.5,7.5h85.333
+                                            c4.143,0,7.5-3.357,7.5-7.5C157.053,80.479,153.696,77.121,149.553,77.121z"/>
+                                        <path style="fill:#000002;" d="M149.553,110.898H64.22c-4.143,0-7.5,3.357-7.5,7.5s3.357,7.5,7.5,7.5h85.333
+                                            c4.143,0,7.5-3.357,7.5-7.5S153.696,110.898,149.553,110.898z"/>
+                                        <path style="fill:#000002;" d="M149.553,144.676H64.22c-4.143,0-7.5,3.357-7.5,7.5c0,4.143,3.357,7.5,7.5,7.5h85.333
+                                            c4.143,0,7.5-3.357,7.5-7.5C157.053,148.033,153.696,144.676,149.553,144.676z"/>
+                                        <path style="fil∂l:#000002;" d="M149.553,178.453H64.22c-4.143,0-7.5,3.357-7.5,7.5c0,4.143,3.357,7.5,7.5,7.5h85.333
+                                            c4.143,0,7.5-3.357,7.5-7.5C157.053,181.811,153.696,178.453,149.553,178.453z"/>
+                                    </g>
+                                </svg>
+                            </button>
+                            <input ng-value="'http://quality.rip/v=' + vidData.display_id" readonly class='module-input embed'>
+                    </section>
+                    <section class='module-section no-styles animate-if' ng-show="searchHistory">
+                        <h2>History</h2>
+                    </section>
+                    <section class='module-section animate-if no-styles animate-if' ng-show="searchHistory">
+                        <div class='history-holder'>
+
+                            <span class='history-item' ng-repeat='item in searchHistory'>
+                                <div class='history-item-magnify'>
+                                    <span aria-hidden="true" data-icon="&#xe600;"></span>
+                                </div>
+                                <div ng-style="{'background-image':'url(http://img.youtube.com/vi/{{item}}/mqdefault.jpg)'}" class='history-item-inner'>
+                                </div>
+                            </span>
+                        </div>
                     </section>
                 </div>
             </div>
@@ -73,8 +109,10 @@
         <footer class='page-footer'>
             <a class='light' href='//twitter.com/markbrandly'>@markbrandly</a>
         </footer>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
+        <!-- // <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> -->
+        <!-- // <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script> -->
+
+
         <script src="js/main.js"></script>
          <!--script>
             // (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

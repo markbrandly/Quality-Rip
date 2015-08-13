@@ -1,6 +1,5 @@
 !function(){
 
-
   var randomId = function(){
     var id = ''
     var hexChars = '0123456789abcdef'
@@ -39,6 +38,16 @@
       new Date( 0 ).toUTCString();
   }
 
+  function setSearchHistory(array){
+    localStorage.setItem('searchHistory',JSON.stringify(array))
+  }
+
+  function getSearchHistory(){
+    var history = localStorage.searchHistory
+    if (history) return JSON.parse(localStorage.searchHistory)
+        return false
+  }
+
   function getUrlData(url){
     if(!url) return
     var dataSegment = url.split('?')[1] || ''
@@ -69,8 +78,6 @@
       return $sce.trustAsResourceUrl(src)
     }
 
-
-
     $scope.fileTypes = [{
       name:"mp4",
       type:"video"
@@ -83,6 +90,16 @@
       name:"mp3",
       type:"audio"
     }]
+
+    $scope.searchHistory = getSearchHistory() || [];
+
+    function appendHistory(id){
+      var index = $scope.searchHistory.indexOf(id)
+      if(index > -1) $scope.searchHistory.splice(index,1)
+      $scope.searchHistory.unshift(id)
+      $scope.searchHistory = $scope.searchHistory.splice(0,5)
+      setSearchHistory($scope.searchHistory)
+    }
 
     $scope.download = function(id){
       var iFrame = document.createElement('iframe')
@@ -132,8 +149,10 @@
           console.log(JSON.stringify(data,null,2))
           if(data['webpage_url']){
             $scope.search = data['webpage_url']
+            appendHistory(data['display_id'])
             updateUrl();
             $timeout(updateVideo)
+            $timeout(updateClipboard)
           }
         })
     }
@@ -144,6 +163,10 @@
       var html = '<iframe src="'+url+'" frameborder="0" allowfullscreen></iframe>';
       var video = document.getElementsByClassName('video-wrapper')[0]
       if(video) video.innerHTML = html
+    }
+
+    function updateClipboard(){
+      document.getElementsByClassName("copy-button")[0].setAttribute('data-clipboard-text','http://quality.rip/v=' + $scope.vidData.display_id)
     }
 
     function initialVideo(){
@@ -165,7 +188,12 @@
       console.log(e.state.state)
     }
 
-    className('embed').click(function(e){console.log(e)})
+    className('embed').click(function(e){
+      var element = e.path[0]
+      element.select()
+    })
+
+var client = new ZeroClipboard( document.getElementsByClassName("copy-button")[0] );
 
   })
 }();

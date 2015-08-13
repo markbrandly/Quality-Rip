@@ -6,12 +6,15 @@ var app = express();
 var youtube = require('./node/youtube.js')
 var path = require('path')
 var staticCache = require('express-static-cache')
+var compression = require('compression')
+
 
 var cookieParser = require('cookie-parser')
 // app.use(staticCache(path.join(__dirname, 'dist'), {
 //   maxAge: 365 * 24 * 60 * 60
 // }))
 
+app.use(compression())
 app.use(express.static('./dist'))
 app.use(helmet())
 app.use(cookieParser())
