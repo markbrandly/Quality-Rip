@@ -93,7 +93,7 @@
                     <section class='module-section animate-if no-styles animate-if' ng-show="searchHistory">
                         <div class='history-holder'>
 
-                            <span class='history-item' ng-repeat='item in searchHistory'>
+                            <span class='history-item' ng-click="setVideo(item)" ng-repeat='item in searchHistory'>
                                 <div class='history-item-magnify'>
                                     <span aria-hidden="true" data-icon="&#xe600;"></span>
                                 </div>

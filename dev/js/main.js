@@ -172,9 +172,14 @@
     function initialVideo(){
       var urlData = getUrlData(location.href);
       if(urlData.v){
-        $scope.search = "https://www.youtube.com/watch?v=" +urlData.v
-        $scope.findVideo()
+        $scope.setVideo(urlData.v)
       }
+    }
+
+    $scope.setVideo = function(id){
+        if(!id) return
+        $scope.search = "https://www.youtube.com/watch?v=" + id
+        $scope.findVideo()
     }
 
     initialVideo();

@@ -245,14 +245,15 @@ body{
 
 .vid-search:focus + .search-icon-holder > .svg-search,
 .search-holder:hover .svg-search{
-  // fill:#222;
+  stroke:#222;
 }
 
 $transitionTime:0.4s;
 
 .svg-search {
     stroke-width:4px;
-    stroke:#000;
+    stroke:#aaa;
+    transition:stroke 0.2s;
     fill:none;
     stroke-linecap:round;
     height:1em;
@@ -292,6 +293,7 @@ $transitionTime:0.4s;
   .svg-search-lens{animation-play-state:running}
   .svg-search-lens-holder{transform:translate(3px,3px) scale(1.2,1.2)}
   .svg-search-lens-n{transform:rotate(-120deg)}
+  .svg-search{stroke:#cd201f!important}
   .svg-search-handle{
     transform:translate(6px,6px);
     opacity:0;
@@ -308,5 +310,5 @@ button.unbutton{
   border:0;
   padding:0;
   margin:0;
+  outline:0;
 }
-∂
