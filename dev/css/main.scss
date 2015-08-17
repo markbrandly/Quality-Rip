@@ -1,6 +1,6 @@
 $ytRed : #cd201f;
 $black: #000;
-
+$green: #3b4;
 
 
 
@@ -21,13 +21,24 @@ $black: #000;
   font-weight:300;
 }
 
-a,.link{color:$ytRed;
+.copy-text{
+  color:$ytRed;
+}
 
-text-decoration:none;
+.copy-button{
+  opacity:0.5;
+  transition:opacity 0.2s;
+  &.zeroclipboard-is-hover, &:hover{
+    opacity: 1;
+  }
+}
+
+a,.link{color:$ytRed;
+  cursor:pointer;
+  text-decoration:none;
   &:hover{
     text-decoration: underline;
   }
-
 }
 
 .hidden{
@@ -63,16 +74,45 @@ text-decoration:none;
   flex-grow:1;
   box-shadow:1px 2px 8px rgba(0,0,0,0.2);
   cursor:pointer;
-  font-size:1.2em;
   line-height:1em;
   color:white;
-  text-shadow:0 0 4px black;
+  text-shadow:0 0 3px black;
   position:relative;
-    &:hover{
-      .history-item-magnify{
-        opacity:1;
-      }
+  &:hover{
+    .history-item-magnify{
+      opacity:1;
     }
+    .history-item-inner{
+      background-size: auto 105%;
+      filter:blur(1px);
+    }
+  }
+}
+
+.history-item-magnify{
+  position:absolute;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  background-color:rgba(0,0,0,0.2);
+  z-index:1;
+  opacity:0;
+  transition:opacity 0.1s;
+        font-size:1.4em;
+}
+
+.history-item-inner{
+  width:100%;
+  padding-bottom:100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 100%;
+  transition: all 0.1s;
+  overflow:hidden;
 }
 
 [data-icon]:before {
@@ -104,31 +144,31 @@ text-decoration:none;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-.history-item:hover .history-item-inner{
-  background-size: auto 105%;
-  filter:blur(1px);
+.float-left{
+  float:left;
 }
 
-.history-item-magnify{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  z-index:1;
-  opacity:0;
-  transition:opacity 0.1s;
+.inline-block{
+  display:inline-block;
 }
 
-.history-item-inner{
-  width:100%;
-  padding-bottom:100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto 100%;
-  transition:background 0.1s, filter 0.1s;
-  overflow:hidden;
+.float-right{
+  float:right;
 }
+
+
+
+
+
+.loading .loading-fade{
+  opacity:0.5;
+}
+
+.loading-fade{
+  transition:opacity 0.5s;
+}
+
+
 
 
 body{
@@ -229,11 +269,14 @@ body{
   outline:0;
   color:#aaa;
   border:0;
-  padding:1em 0 1em 1em;
 }
 
-* + .module-input{
-  padding:1em 1em 1em 0;
+.search-holder > *{
+  padding:1em;
+}
+
+.search-holder > * + * {
+  padding-left:0;
 }
 
 

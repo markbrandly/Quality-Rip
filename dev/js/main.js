@@ -48,6 +48,8 @@
         return false
   }
 
+
+
   function getUrlData(url){
     if(!url) return
     var dataSegment = url.split('?')[1] || ''
@@ -157,6 +159,11 @@
         })
     }
 
+    $scope.clearHistory = function(){
+      $scope.searchHistory = []
+      setSearchHistory([])
+    }
+
     function updateVideo(){
       if(!$scope.vidData || !$scope.vidData.display_id) return
       var url = $scope.trustSrc('https://www.youtube.com/embed/'+$scope.vidData.display_id);
@@ -166,7 +173,7 @@
     }
 
     function updateClipboard(){
-      document.getElementsByClassName("copy-button")[0].setAttribute('data-clipboard-text','http://quality.rip/v=' + $scope.vidData.display_id)
+      document.getElementsByClassName("copy-button")[0].setAttribute('data-clipboard-text','http://quality.rip/?v=' + $scope.vidData.display_id)
     }
 
     function initialVideo(){
@@ -198,7 +205,7 @@
       element.select()
     })
 
-var client = new ZeroClipboard( document.getElementsByClassName("copy-button")[0] );
+    var client = new ZeroClipboard( document.getElementsByClassName("copy-button")[0] );
 
   })
 }();

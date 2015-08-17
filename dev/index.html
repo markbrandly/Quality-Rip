@@ -1,6 +1,5 @@
 <!doctype html>
 <html class='no-js' lang="en">
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -9,7 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/f4b3732b5b/UntitledProject2/style.css">
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -20,12 +18,10 @@
                 <h1>Quality<span class='light'>.rip</span></h1>
             </div>
         </header>
-
         <section class='page-body' ng-app='yt-dl' ng-controller='ctrl' ng-animate>
             <div class='width-container'>
-                <div class='video-module'>
-
-                    <section class="module-section  no-padding">
+                <div class='video-module' ng-class="{loading:loading}">
+                    <section class="module-section no-padding">
                         <form class='search-holder' ng-submit="findVideo()">
                             <input type='search' ng-model='search' class='vid-search module-input' placeholder='Youtube Video Link'>
                             <button class="unbutton search-icon-holder" ng-class="{loading:loading}">
@@ -42,31 +38,25 @@
                             </button>
                         </form>
                     </section>
-
-                    <section class='module-section animate-if' ng-show="vidData && vidData.title">
+                    <section class='module-section animate-if loading-fade' ng-show="vidData && vidData.title">
                         <a ng-href='{{vidData.webpage_url}}'><h2 class='video-title'>{{vidData.title}}</h2></a>
                     </section>
-
-                    <section class='module-section no-padding' ng-show="vidData.thumbnail"> 
+                    <section class='module-section no-padding loading-fade' ng-show="vidData.thumbnail"> 
                         <div class='video-wrapper'>
                             <!-- This is what's going to be here, but the content is generated in Javascript because
                                 Iframes do weird things to state Change
-
                             <iframe ng-src="{{trustSrc('https://www.youtube.com/embed/'+vidData.display_id)}}" frameborder="0" allowfullscreen></iframe>
-
                             -->
                         </div>
                     </section>
-
-                    <section class="module-section animate-if" ng-show="vidData.display_id">
+                    <section class="module-section animate-if loading-fade" ng-show="vidData.display_id">
                         <div ng-repeat='type in fileTypes'>
                             {{type.name.toUpperCase()}}<span class='small light'>{{type.type}}</span>
                         <button class='unbutton link' ng-click='download(vidData.display_id)'>Download</button>
                         </div>
                     </section>
-
-                    <section class="module-section animate-if no-padding search-holder" ng-show="vidData.display_id">
-                            <button class='copy-button unbutton' data-clipboard-text="Copy Me!">
+                    <section class="module-section animate-if no-padding search-holder loading-fade" ng-show="vidData.display_id">
+                            <button class='copy-button unbutton' ng-click="vidData.copied=true" data-clipboard-text="Copy Me!">
                                 <svg viewBox="0 0 247.744 247.744" height="1em" width="1em" style="padding:1em;box-sizing:content-box;">
                                     <g>
                                         <path style="fill:#000002;" d="M206.89,0H74.824c-9.649,0-17.5,7.851-17.5,17.5v21.005h-16.47c-9.649,0-17.5,7.85-17.5,17.5
@@ -80,19 +70,19 @@
                                             c4.143,0,7.5-3.357,7.5-7.5S153.696,110.898,149.553,110.898z"/>
                                         <path style="fill:#000002;" d="M149.553,144.676H64.22c-4.143,0-7.5,3.357-7.5,7.5c0,4.143,3.357,7.5,7.5,7.5h85.333
                                             c4.143,0,7.5-3.357,7.5-7.5C157.053,148.033,153.696,144.676,149.553,144.676z"/>
-                                        <path style="fil∂l:#000002;" d="M149.553,178.453H64.22c-4.143,0-7.5,3.357-7.5,7.5c0,4.143,3.357,7.5,7.5,7.5h85.333
+                                        <path style="fill:#000002;" d="M149.553,178.453H64.22c-4.143,0-7.5,3.357-7.5,7.5c0,4.143,3.357,7.5,7.5,7.5h85.333
                                             c4.143,0,7.5-3.357,7.5-7.5C157.053,181.811,153.696,178.453,149.553,178.453z"/>
                                     </g>
                                 </svg>
                             </button>
                             <input ng-value="'http://quality.rip/v=' + vidData.display_id" readonly class='module-input embed'>
+                            <span ng-show="vidData.copied" class='small light copy-text animate-if'>Copied!</span>
                     </section>
-                    <section class='module-section no-styles animate-if' ng-show="searchHistory">
-                        <h2>History</h2>
+                    <section class='module-section no-styles animate-if' ng-show="searchHistory && searchHistory.length">
+                        <h2 class='inline-block'>History</h2> <a ng-click="clearHistory()" class="small light">clear</a>
                     </section>
-                    <section class='module-section animate-if no-styles animate-if' ng-show="searchHistory">
+                    <section class='module-section animate-if no-styles animate-if' ng-show="searchHistory && searchHistory.length">
                         <div class='history-holder'>
-
                             <span class='history-item' ng-click="setVideo(item)" ng-repeat='item in searchHistory'>
                                 <div class='history-item-magnify'>
                                     <span aria-hidden="true" data-icon="&#xe600;"></span>
@@ -105,14 +95,11 @@
                 </div>
             </div>
         </section>
-
         <footer class='page-footer'>
             <a class='light' href='//twitter.com/markbrandly'>@markbrandly</a>
         </footer>
         <!-- // <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script> -->
         <!-- // <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script> -->
-
-
         <script src="js/main.js"></script>
          <!--script>
             // (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=

@@ -26,7 +26,7 @@ gulp.task('sass', function(){
 
 gulp.task('index',function(){
   gulp.src('./dev/index.html')
-    .pipe(minifyHTML({conditionals:true}))
+    .pipe(minifyHTML({conditionals:true,loose:true}))
     .pipe(gulp.dest('./dist'))
 })
 
