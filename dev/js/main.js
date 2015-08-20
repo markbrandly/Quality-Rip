@@ -44,8 +44,9 @@
 
   function getSearchHistory(){
     var history = localStorage.searchHistory
-    if (history) return JSON.parse(localStorage.searchHistory)
-        return false
+    if (history)
+      return JSON.parse(localStorage.searchHistory)
+    return false
   }
 
 

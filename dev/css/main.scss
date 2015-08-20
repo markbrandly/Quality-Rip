@@ -115,35 +115,6 @@ a,.link{color:$ytRed;
   overflow:hidden;
 }
 
-[data-icon]:before {
-  font-family: icons; /* BYO icon font, mapped smartly */
-  content: attr(data-icon);
-  speak: none; /* Not to be trusted, but hey. */
-}
-
-@font-face {
-  font-family: 'icons';
-  src:url('../assets/fonts/magnifying.eot');
-  src:url('../assets/fonts/magnifying.eot') format('embedded-opentype'),
-    url('../assets/fonts/magnifying.ttf') format('truetype'),
-    url('../assets/fonts/magnifying.woff') format('woff'),
-    url('../assets/fonts/magnifying.svg') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-[class^="icon-"], [class*=" icon-"] {
-  font-family: 'icons';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 .float-left{
   float:left;
 }
@@ -283,8 +254,6 @@ body{
 .search-holder > * + * {
   padding-left:0;
 }
-
-
 
 .vid-search:focus{
   color:black;
