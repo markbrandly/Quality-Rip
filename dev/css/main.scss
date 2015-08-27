@@ -72,7 +72,7 @@ a,.link{color:$ytRed;
   max-width:25%;
   margin:0.5em;
   flex-grow:1;
-  box-shadow:0px 2px 4px rgba(0,0,0,0.2);
+  box-shadow:0px 1px 4px rgba(0,0,0,0.2);
   cursor:pointer;
   line-height:1em;
   color:white;
@@ -134,6 +134,33 @@ a,.link{color:$ytRed;
 .loading-fade{
   transition:opacity 0.5s;
 }
+
+.downloads-holder{
+  display:flex;
+  margin:-0.5em;
+  flex-wrap:wrap;
+}
+
+.download-item{
+  background-color:white;
+  padding:1em;
+  box-shadow:0px 1px 4px rgba(0,0,0,0.2);
+  margin:0.5em;
+  flex:1;
+  // display:flex;
+  min-width:25%;
+  cursor:pointer;
+  transition:box-shadow 0.2s, transform 0.2s;
+  &:hover{
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+    transform:translateY(-1px);
+  }
+  &:active{
+    transform:translateY(0px);
+    box-shadow:0px 1px 1px rgba(0,0,0,0.1);
+  }
+}
+
 
 .video-module{
   margin-top:3em;
@@ -233,6 +260,9 @@ body{
   align-items:center;
 }
 
+.text-center{
+  text-align: center;
+}
 
 .embed{
   cursor:pointer;

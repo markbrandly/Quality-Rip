@@ -50,12 +50,17 @@
                             -->
                         </div>
                     </section>
-                    <section class="module-section animate-if loading-fade" ng-show="vidData.display_id">
-                        <div ng-repeat='type in fileTypes'>
-                            {{type.name.toUpperCase()}}<span class='small light'>/{{type.type}}</span>
-                            <button class='unbutton link' ng-click='download(vidData.display_id,type.name)'>Download</button>
+
+                    <section class="module-section animate-if loading-fade no-styles" ng-show="vidData.display_id">
+                        <div class='downloads-holder text-center'>
+                            <div ng-repeat='type in fileTypes' class='download-item' ng-click='download(vidData.display_id,type.name)'>
+                                <h2>{{type.name.toUpperCase()}}</h2>
+                                <div class='small light'>{{type.type}}</div>
+                                <!-- <button class='unbutton link' ng-click='download(vidData.display_id,type.name)'>Download</button> -->
+                            </div>
                         </div>
                     </section>
+
                     <section class="module-section animate-if no-padding search-holder loading-fade" ng-show="vidData.display_id">
                             <button class='copy-button unbutton' ng-click="vidData.copied=true" data-clipboard-text="Copy Me!">
                                 <svg viewBox="0 0 247.744 247.744" height="1em" width="1em" style="padding:1em;box-sizing:content-box;">
