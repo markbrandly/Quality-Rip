@@ -1,5 +1,8 @@
 !function(){
 
+  // var ytApiLoaded = false
+  var player
+
   var randomId = function(){
     var id = ''
     var hexChars = '0123456789abcdef'
@@ -177,10 +180,36 @@
 
     function updateVideo(){
       if(!$scope.vidData || !$scope.vidData.display_id) return
-      var url = $scope.trustSrc('https://www.youtube.com/embed/'+$scope.vidData.display_id);
-      var html = '<iframe src="'+url+'" frameborder="0" allowfullscreen></iframe>';
-      var video = document.getElementsByClassName('video-wrapper')[0]
-      if(video) video.innerHTML = html
+      var videoHolder = document.getElementsByClassName('video-wrapper')[0]
+      videoHolder.removeChild(document.getElementById('ytplayer'))
+      var ytPlayer = document.createElement('div')
+      ytPlayer.id = 'ytplayer'
+      videoHolder.appendChild(ytPlayer)
+      player = new YT.Player('ytplayer',{
+        videoId: $scope.vidData.display_id,
+        playerVars:{
+          autoplay:1,
+          controls:0,
+          showinfo:0,
+          modestbranding:1,
+          loop:1
+        },
+        events: {
+          'onReady': function(){
+            player.mute()
+          }
+        }
+      })
+
+      // var url = $scope.trustSrc('https://www.youtube.com/embed/'+$scope.vidData.display_id+'?autoplay=1&controls=0&showinfo=0&modestbranding=1&enablejsapi=1');
+      // var player = document.createElement('iframe')
+      // player.src = url
+      // player.setAttribute('frameborder',0)
+      // console.log(player)
+      // player.mute()
+      // var html = '<iframe src="'+url+'" frameborder="0" allowfullscreen></iframe>';
+      // var video = document.getElementsByClassName('video-wrapper')[0]
+      // if(video) video.appendChild(player)
     }
 
     function updateClipboard(){
@@ -219,4 +248,9 @@
     var client = new ZeroClipboard( document.getElementsByClassName("copy-button")[0] );
 
   })
+
+//youtube player api https://www.youtube.com/player_api
+
 }();
+
+if (!window['YT']) {var YT = {loading: 0,loaded: 0,queue:0};}if (!window['YTConfig']) {var YTConfig = {'host': 'http://www.youtube.com'};}if (!YT.loading) {YT.loading = 1;(function(){var l = [];YT.ready = function(f) {if (YT.loaded) {f();} else {l.push(f);}};window.onYTReady = function() {YT.loaded = 1;for (var i = 0; i < l.length; i++) {try {l[i]();} catch (e) {}}};YT.setConfig = function(c) {for (var k in c) {if (c.hasOwnProperty(k)) {YTConfig[k] = c[k];}}};var a = document.createElement('script');a.type = 'text/javascript';a.id = 'www-widgetapi-script';a.src = 'https:' + '//s.ytimg.com/yts/jsbin/www-widgetapi-vflR1icA5/www-widgetapi.js';a.async = true;var b = document.getElementsByTagName('script')[0];b.parentNode.insertBefore(a, b);})();}

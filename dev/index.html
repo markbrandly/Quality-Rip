@@ -48,8 +48,14 @@
                                 Iframes do weird things to state Change
                             <iframe ng-src="{{trustSrc('https://www.youtube.com/embed/'+vidData.display_id)}}" frameborder="0" allowfullscreen></iframe>
                             -->
+                            <div id='ytplayer'></div>
                         </div>
                     </section>
+<!--                     <section class='module-section' ng-show="vidData">
+                        <video width="320" height="240" autoplay>
+                          <source ng-src="trustsrc('download?id=' + vidData.display_id +'&token=577ef623fa43ad39&type=webm')" type="video/webm">
+                        </video>
+                    </section> -->
 
                     <section class="module-section animate-if loading-fade no-styles" ng-show="vidData.display_id">
                         <div class='downloads-holder text-center'>

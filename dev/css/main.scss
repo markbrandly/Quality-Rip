@@ -161,6 +161,15 @@ a,.link{color:$ytRed;
   }
 }
 
+// #ytplayer{
+//   filter:blur(2px);
+//   opacity:0.8;
+//   transition:filter 0.5s, opacity 0.5s;
+//   &:hover{
+//     filter:blur(0);
+//     opacity:1;
+//   }
+// }
 
 .video-module{
   margin-top:3em;
