@@ -17,16 +17,30 @@ var audioFormats = ['mp3','aac','wav']
 
 
 
-var download = function(id,token,vidId,res){
+var download = function(id,opts,res){
+  var vidId = opts.id
+  var token = opts.token
+  var type = opts.type || 'mp4'
   if(!id || !vidId || !res) return
   var dir = __dirname+'/tmp/downloads/'+id
   var video = escapeVideo('https://www.youtube.com/watch?v='+vidId)
   var command = 'youtube-dl '+video+' --restrict-filenames -o "' + dir +'/%(title)s.%(ext)s"'
+  var conversionTypes = ['mp3','wav','aac']
+  var standardTypes = ['mp4','webm','m4a']
+  if(conversionTypes.indexOf(type) < 0 && standardTypes.indexOf(type) < 0)
+    type = 'mp4'
+  if(conversionTypes.indexOf(type) > -1)
+    command += ' -x --audio-format ' + type +' --audio-quality 0'
+  else if(standardTypes.indexOf(type) > -1)
+    command += ' -f ' + type
   console.log(command)
   exec(command,function(e){
     exec(command+' --get-filename',function(e,filename){
+      filename = filename.split('.')
+      filename.pop()
+      filename = filename.join('.') + '.' + type
       res.cookie(token,'1')
-      res.download(filename.slice(0,-1)) //removes newline from end of filename
+      res.download(filename)
       exec('rm -rf -- '+dir)
     })
   })
@@ -59,9 +73,10 @@ var createId = function(callback){
   })
 }
 
-exports.download = function(vidId,token,res){
+exports.download = function(opts,res){
+
   createId(function(id){
-    download(id,token,vidId,res)
+    download(id,opts,res)
   });
 }
 

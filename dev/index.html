@@ -52,8 +52,8 @@
                     </section>
                     <section class="module-section animate-if loading-fade" ng-show="vidData.display_id">
                         <div ng-repeat='type in fileTypes'>
-                            {{type.name.toUpperCase()}}<span class='small light'>{{type.type}}</span>
-                        <button class='unbutton link' ng-click='download(vidData.display_id)'>Download</button>
+                            {{type.name.toUpperCase()}}<span class='small light'>/{{type.type}}</span>
+                            <button class='unbutton link' ng-click='download(vidData.display_id,type.name)'>Download</button>
                         </div>
                     </section>
                     <section class="module-section animate-if no-padding search-holder loading-fade" ng-show="vidData.display_id">

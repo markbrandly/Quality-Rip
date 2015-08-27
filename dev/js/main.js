@@ -49,8 +49,6 @@
     return false
   }
 
-
-
   function getUrlData(url){
     if(!url) return
     var dataSegment = url.split('?')[1] || ''
@@ -86,12 +84,24 @@
       type:"video"
     },
     {
-      name:"ogg",
-      type:"video"
+      name: "webm",
+      type: "video"
     },
     {
       name:"mp3",
       type:"audio"
+    },
+    {
+      name: "m4a",
+      type: "audio"
+    },
+    {
+      name: "wav",
+      type: "audio"
+    },
+    {
+      name: "aac",
+      type: "audio"
     }]
 
     $scope.searchHistory = getSearchHistory() || [];
@@ -104,11 +114,11 @@
       setSearchHistory($scope.searchHistory)
     }
 
-    $scope.download = function(id){
+    $scope.download = function(id,type){
       var iFrame = document.createElement('iframe')
       var downloadToken = randomId();
       iFrame.setAttribute('class','hidden');
-      iFrame.setAttribute('src','download?id='+id+'&token='+downloadToken);
+      iFrame.setAttribute('src','download?id='+id+'&token='+downloadToken+'&type='+type);
       console.log(iFrame)
       document.body.appendChild(iFrame);
       tokenListen(downloadToken,function(){
@@ -185,9 +195,9 @@
     }
 
     $scope.setVideo = function(id){
-        if(!id) return
-        $scope.search = "https://www.youtube.com/watch?v=" + id
-        $scope.findVideo()
+      if(!id) return
+      $scope.search = "https://www.youtube.com/watch?v=" + id
+      $scope.findVideo()
     }
 
     initialVideo();

@@ -23,8 +23,9 @@ app.get('/download',function(req,res){
   // res.setHeader('Content-disposition', 'attachment; filename="Sleepy_Tom_-_Pusher_feat._Anna_Lunoe_Branchez_Remix.webm"');
   // res.setHeader('Content-type', 'video/webm');
   var id = req.query.id
+  var type = req.query.type
   var token = req.query.token
-  youtube.download(id,token,res)
+  youtube.download({id:id,token:token,type:type},res)
 })
 
 app.get('/videoJson',function(req,res){
